@@ -25,13 +25,14 @@ $(document).ready(function() {
             }
         }
     });
+$('.filters button').click(function() {
         $.ajax({
             type:'POST',
             url:'http://127.0.0.1:5001/api/v1/places_search',
             contentType: 'application/json',
             dataType: 'json',
-            data: {},
-            success: function(places){
+            data: JSON.stringify({ amenities: Object.keys(amenitiesChecked) }),
+        success: function(places){
                 for (let i = 0; i < places.length; i++) {
                     $('.places').append(`
                         <article>
@@ -58,3 +59,4 @@ $(document).ready(function() {
             }
         });
     });
+});
